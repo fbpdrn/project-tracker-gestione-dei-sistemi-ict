@@ -1,0 +1,46 @@
+.o_kanban_details {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+}
+
+.o_kanban_content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.o_kanban_description {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-height: 5em;
+    line-height: 1.5em;
+    margin-bottom: 1.5em;
+}
+
+.o_kanban_status {
+    font-size: 0.8em;
+}
+
+.o_kanban_status_container {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 5px;
+    border-top-left-radius: 5px;
+}
+
+.o_kanban_status_on_track {
+    background-color: #4caf50;
+}
+
+.o_kanban_status_at_risk {
+    background-color: #ff9800;
+}
+
+.o_kanban_status_delayed {
+    background-color: #f44336;
+}

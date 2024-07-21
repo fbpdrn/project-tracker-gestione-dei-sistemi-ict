@@ -1,0 +1,70 @@
+<odoo>
+    <!-- Tree View -->
+    <record id="view_project_tree" model="ir.ui.view">
+        <field name="name">pt.project.tree</field>
+        <field name="model">pt.project</field>
+        <field name="arch" type="xml">
+            <tree string="Projects">
+                <field name="name"/>
+                <field name="description"/>
+                <field name="status"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Kanban View -->
+    <record id="view_project_kanban" model="ir.ui.view">
+        <field name="name">pt.project.kanban</field>
+        <field name="model">pt.project</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="status" create="true" edit="true">
+                <field name="name"/>
+                <field name="description"/>
+                <field name="status"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div class="o_kanban_details">
+                                <strong><t t-esc="record.name.value"/></strong>
+                                <div class="o_kanban_description">
+                                    <t t-esc="record.description.value"/>
+                                </div>
+                                <div class="o_kanban_status_container">
+                                    <span t-attf-class="o_kanban_status o_kanban_status_#{record.status.raw_value}">
+                                        <t t-esc="record.status.value"/>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_project_form" model="ir.ui.view">
+        <field name="name">pt.project.form</field>
+        <field name="model">pt.project</field>
+        <field name="arch" type="xml">
+            <form string="Project">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="description"/>
+                        <field name="status"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_projects" model="ir.actions.act_window">
+        <field name="name">Projects</field>
+        <field name="res_model">pt.project</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="view_id" ref="view_project_kanban"/>
+        <field name="context">{}</field>
+    </record>
+</odoo>
