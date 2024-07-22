@@ -30,6 +30,12 @@
 
 .o_kanban_status {
     font-size: 0.8em;
+    padding: 2px 8px;
+    color: var(--color-white);
+    border-radius: 12px;
+    text-transform: uppercase;
+    display: inline-block;
+    margin-top: 8px;
 }
 
 .o_kanban_status_container {
