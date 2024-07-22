@@ -55,5 +55,5 @@
 }
 
 .o_kanban_status_delayed {
-    background-color: #f44336;
+    background-color: var(--color-red);
 }
