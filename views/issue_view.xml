@@ -15,7 +15,8 @@
                         <field name="priority"/>
                         <field name="assignee_id"/>
                         <field name="reviewer_id"/>
-                        <field name="tag_ids"/>
+                        <field name="project_id" readonly="true"/>
+                        <field name="tag_ids" domain="[('project_id', '=', project_id)]" context="{'default_project_id': project_id}"/>
                     </group>
                 </sheet>
             </form>
