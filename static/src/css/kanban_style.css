@@ -1,3 +1,10 @@
+:root {
+    --color-white: #fff;
+    --color-red: #f44336;
+    --color-orange: #ff9800;
+    --color-green: #4caf50;
+}
+
 .o_kanban_details {
     display: flex;
     flex-direction: column;
@@ -34,11 +41,11 @@
 }
 
 .o_kanban_status_on_track {
-    background-color: #4caf50;
+    background-color: var(--color-green);
 }
 
 .o_kanban_status_at_risk {
-    background-color: #ff9800;
+    background-color: var(--color-orange);
 }
 
 .o_kanban_status_delayed {
