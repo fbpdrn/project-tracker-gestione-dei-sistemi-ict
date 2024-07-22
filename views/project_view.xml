@@ -54,6 +54,42 @@
                         <field name="description"/>
                         <field name="status"/>
                     </group>
+                    <notebook>
+                        <page string="Issues">
+                            <field name="issue_ids" context="{'default_project_id': active_id}">
+                                <kanban>
+                                    <field name="name"/>
+                                    <field name="description"/>
+                                    <templates>
+                                        <t t-name="kanban-box">
+                                            <div class="oe_kanban_global_click">
+                                                <div class="o_kanban_details">
+                                                    <strong><t t-esc="record.name.value"/></strong>
+                                                    <div class="o_kanban_description">
+                                                        <t t-esc="record.description.value"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </t>
+                                    </templates>
+                                </kanban>
+                            </field>
+                        </page>
+                        <page string="Tags">
+                            <field name="issue_tag_ids" context="{'default_project_id': active_id}">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="color"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="name"/>
+                                        <field name="color" widget="color"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
         </field>

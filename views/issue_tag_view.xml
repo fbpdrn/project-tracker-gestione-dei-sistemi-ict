@@ -1,0 +1,17 @@
+<odoo>
+    <!-- Form View -->
+    <record id="view_project_issue_status_form" model="ir.ui.view">
+        <field name="name">pt.project.issue.tag.form</field>
+        <field name="model">pt.project.issue.tag</field>
+        <field name="arch" type="xml">
+            <form string="Issue Tag">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="color" widget="color"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>
