@@ -1,5 +1,7 @@
 :root {
     --color-white: #fff;
+    --color-grey: #616161;
+    --color-blue: #2196f3;
     --color-red: #f44336;
     --color-orange: #ff9800;
     --color-green: #4caf50;
@@ -55,5 +57,17 @@
 }
 
 .o_kanban_status_delayed {
+    background-color: var(--color-red);
+}
+
+.o_kanban_status_low {
+    background-color: var(--color-grey);
+}
+
+.o_kanban_status_medium {
+    background-color: var(--color-blue);
+}
+
+.o_kanban_status_high {
     background-color: var(--color-red);
 }

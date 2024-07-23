@@ -60,6 +60,7 @@
                                 <kanban>
                                     <field name="name"/>
                                     <field name="description"/>
+                                    <field name="priority"/>
                                     <templates>
                                         <t t-name="kanban-box">
                                             <div class="oe_kanban_global_click">
@@ -67,6 +68,11 @@
                                                     <strong><t t-esc="record.name.value"/></strong>
                                                     <div class="o_kanban_description">
                                                         <t t-esc="record.description.value"/>
+                                                    </div>
+                                                    <div class="o_kanban_status_container">
+                                                        <span t-attf-class="o_kanban_status o_kanban_status_#{record.priority.raw_value}">
+                                                            <t t-esc="record.priority.value"/>
+                                                        </span>
                                                     </div>
                                                 </div>
                                             </div>
