@@ -75,6 +75,26 @@
                                 </kanban>
                             </field>
                         </page>
+                        <page string="Milestones">
+                            <field name="milestone_ids">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="start_date"/>
+                                    <field name="end_date"/>
+                                    <field name="status"/>
+                                    <field name="project_id" readonly="true"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="name"/>
+                                        <field name="start_date"/>
+                                        <field name="end_date"/>
+                                        <field name="status"/>
+                                        <field name="project_id" readonly="true"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
                         <page string="Tags">
                             <field name="issue_tag_ids">
                                 <tree>

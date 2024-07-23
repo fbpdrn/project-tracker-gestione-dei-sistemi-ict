@@ -1,0 +1,20 @@
+<odoo>
+    <!-- Form View -->
+    <record id="view_project_issue_status_form" model="ir.ui.view">
+        <field name="name">pt.project.milestone.form</field>
+        <field name="model">pt.project.milestone</field>
+        <field name="arch" type="xml">
+            <form string="Project Milestone">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                        <field name="status"/>
+                        <field name="project_id" readonly="true"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

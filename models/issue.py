@@ -19,3 +19,4 @@ class Issue(models.Model):
     reviewer_id = fields.Many2one('res.users', string='Reviewer')
     project_id = fields.Many2one("pt.project", string="Project", ondelete="cascade")
     tag_ids = fields.Many2many('pt.project.issue.tag', string='Tags', ondelete="restrict")
+    milestone_id = fields.Many2one('pt.project.milestone', string='Milestone')
