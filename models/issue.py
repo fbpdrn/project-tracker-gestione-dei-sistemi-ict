@@ -15,6 +15,10 @@ class Issue(models.Model):
         ('medium', 'Medium'),
         ('high', 'High'),
     ], string='Priority', default='medium')
+    status = fields.Selection([
+        ('open', 'Open'),
+        ('closed', 'Closed'),
+    ], string='Status', default='open')
     assignee_id = fields.Many2one('res.users', string='Assignee')
     reviewer_id = fields.Many2one('res.users', string='Reviewer')
     project_id = fields.Many2one("pt.project", string="Project", ondelete="cascade")
