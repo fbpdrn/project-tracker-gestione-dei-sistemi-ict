@@ -1,6 +1,7 @@
 :root {
     --color-white: #fff;
     --color-grey: #616161;
+    --color-grey1: #d3d3d3;
     --color-blue: #2196f3;
     --color-red: #f44336;
     --color-orange: #ff9800;
@@ -12,6 +13,7 @@
     flex-direction: column;
     height: 100%;
     position: relative;
+    min-height: 5em;
 }
 
 .o_kanban_content {
@@ -21,13 +23,22 @@
     justify-content: space-between;
 }
 
-.o_kanban_description {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    max-height: 5em;
-    line-height: 1.5em;
-    margin-bottom: 1.5em;
+.o_kanban_milestone {
+    display: flex;
+    top: 10px;
+    left: 10px;
+    font-style: italic;
+    min-height: 1.5em;
+}
+
+.o_kanban_weight {
+    display: flex;
+    align-items: center;
+    margin-top: 8px;
+}
+
+.o_kanban_weight .fa {
+    margin-right: 5px;
 }
 
 .o_kanban_status {
@@ -70,4 +81,11 @@
 
 .o_kanban_status_high {
     background-color: var(--color-red);
+}
+
+.oe_kanban_global_click.o_kanban_disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: var(--color-grey1);
+    pointer-events: none;
 }

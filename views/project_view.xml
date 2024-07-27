@@ -21,18 +21,19 @@
                 <field name="name"/>
                 <field name="description"/>
                 <field name="status"/>
+                <field name="open_issues_count"/>
                 <templates>
                     <t t-name="kanban-box">
                         <div class="oe_kanban_global_click">
                             <div class="o_kanban_details">
                                 <strong><t t-esc="record.name.value"/></strong>
-                                <div class="o_kanban_description">
-                                    <t t-esc="record.description.value"/>
-                                </div>
                                 <div class="o_kanban_status_container">
                                     <span t-attf-class="o_kanban_status o_kanban_status_#{record.status.raw_value}">
                                         <t t-esc="record.status.value"/>
                                     </span>
+                                </div>
+                                 <div class="o_project_open_issues">
+                                    <t t-esc="record.open_issues_count.value"/> Open Issues
                                 </div>
                             </div>
                         </div>
@@ -102,23 +103,34 @@
         <field name="name">pt.project.issue.kanban</field>
         <field name="model">pt.issue</field>
         <field name="arch" type="xml">
-            <kanban default_group_by="tag_ids" create="true">
+            <kanban default_group_by="tag_ids" create="true" records_draggable="false">
                 <field name="name"/>
                 <field name="description"/>
                 <field name="priority"/>
+                <field name="status"/>
+                <field name="milestone_id"/>
+                <field name="weight"/>
                 <field name="tag_ids"/>
                 <templates>
                     <t t-name="kanban-box">
-                        <div class="oe_kanban_global_click">
-                            <div class="o_kanban_details">
-                                <strong><t t-esc="record.name.value"/></strong>
-                                <div class="o_kanban_description">
-                                    <t t-esc="record.description.value"/>
-                                </div>
-                                <div class="o_kanban_status_container">
-                                    <span t-attf-class="o_kanban_status o_kanban_status_#{record.priority.raw_value}">
-                                        <t t-esc="record.priority.value"/>
-                                    </span>
+                        <div t-att-class="'oe_kanban_global_click ' + (record.status.raw_value == 'closed' ? 'o_kanban_disabled' : '')">
+                            <div t-att-class="o_kanban_card">
+                                <div class="o_kanban_details">
+                                    <strong><t t-esc="record.name.value"/></strong>
+                                    <div class="o_kanban_content">
+                                        <div class="o_kanban_milestone">
+                                            <t t-esc="record.milestone_id.value"/>
+                                        </div>
+                                    </div>
+                                    <div class="o_kanban_status_container">
+                                        <span t-attf-class="o_kanban_status o_kanban_status_#{record.priority.raw_value}">
+                                            <t t-esc="record.priority.value"/>
+                                        </span>
+                                        <div class="o_kanban_weight">
+                                            <span class="fa fa-balance-scale"/>
+                                            <t t-esc="record.weight.value"/>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -137,11 +149,11 @@
                 <field name="milestone_id"/>
                 <field name="assignee_id"/>
                 <filter string="Open Issues" name="open_issues" domain="[('status', '=', 'open')]"/>
-                <filter string="Open Issues" name="open_issues" domain="[('status', '=', 'closed')]"/>
+                <filter string="Closed Issues" name="closed_issues" domain="[('status', '=', 'closed')]"/>
                 <filter string="Low Priority" name="low_priority" domain="[('priority', '=', 'low')]"/>
                 <filter string="Medium Priority" name="medium_priority" domain="[('priority', '=', 'medium')]"/>
                 <filter string="High Priority" name="high_priority" domain="[('priority', '=', 'high')]"/>
-                </search>
+            </search>
         </field>
     </record>
 
