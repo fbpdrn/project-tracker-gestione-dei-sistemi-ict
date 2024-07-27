@@ -54,33 +54,8 @@
                         <field name="description"/>
                         <field name="status"/>
                     </group>
+                    <button name="%(action_project_issues)d" type="action" string="View Issues" class="btn-primary" context="{'default_project_id': active_id}"/>
                     <notebook>
-                        <page string="Issues">
-                            <field name="issue_ids" context="{'default_project_id': active_id}">
-                                <kanban>
-                                    <field name="name"/>
-                                    <field name="description"/>
-                                    <field name="priority"/>
-                                    <templates>
-                                        <t t-name="kanban-box">
-                                            <div class="oe_kanban_global_click">
-                                                <div class="o_kanban_details">
-                                                    <strong><t t-esc="record.name.value"/></strong>
-                                                    <div class="o_kanban_description">
-                                                        <t t-esc="record.description.value"/>
-                                                    </div>
-                                                    <div class="o_kanban_status_container">
-                                                        <span t-attf-class="o_kanban_status o_kanban_status_#{record.priority.raw_value}">
-                                                            <t t-esc="record.priority.value"/>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </t>
-                                    </templates>
-                                </kanban>
-                            </field>
-                        </page>
                         <page string="Milestones">
                             <field name="milestone_ids">
                                 <tree>
@@ -123,11 +98,50 @@
         </field>
     </record>
 
+    <record id="view_project_issue_kanban" model="ir.ui.view">
+        <field name="name">pt.project.issue.kanban</field>
+        <field name="model">pt.issue</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="tag_ids" create="true" edit="true">
+                <field name="name"/>
+                <field name="description"/>
+                <field name="priority"/>
+                <field name="tag_ids"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div class="o_kanban_details">
+                                <strong><t t-esc="record.name.value"/></strong>
+                                <div class="o_kanban_description">
+                                    <t t-esc="record.description.value"/>
+                                </div>
+                                <div class="o_kanban_status_container">
+                                    <span t-attf-class="o_kanban_status o_kanban_status_#{record.priority.raw_value}">
+                                        <t t-esc="record.priority.value"/>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
     <!-- Action -->
     <record id="action_projects" model="ir.actions.act_window">
         <field name="name">Projects</field>
         <field name="res_model">pt.project</field>
         <field name="view_mode">kanban,tree,form</field>
         <field name="view_id" ref="view_project_kanban"/>
+    </record>
+
+    <record id="action_project_issues" model="ir.actions.act_window">
+        <field name="name">Project Issues</field>
+        <field name="res_model">pt.issue</field>
+        <field name="view_mode">kanban,form</field>
+        <field name="view_id" ref="view_project_issue_kanban"/>
+        <field name="context">{'default_project_id': active_id}</field>
+        <field name="domain">[('project_id', '=', active_id)]</field>
     </record>
 </odoo>
