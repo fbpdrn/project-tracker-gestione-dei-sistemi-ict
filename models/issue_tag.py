@@ -6,5 +6,5 @@ class Tag(models.Model):
     _description = 'Project Issue Tag'
 
     name = fields.Char(string='Name', required=True)
-    color = fields.Char(string='Color', help='Background color', required=True)
+    order = fields.Integer(string='Order', default=0)
     project_id = fields.Many2one('pt.project', string='Project', ondelete='cascade', required=True)

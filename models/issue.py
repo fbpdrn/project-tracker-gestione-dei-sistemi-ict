@@ -29,7 +29,7 @@ class Issue(models.Model):
     def _group_expand_issue_tag(self, statuses, domain, order):
         project_id = self.env.context.get('default_project_id')
         if project_id:
-            return self.env['pt.project.issue.tag'].search([('project_id', '=', project_id)])
+            return self.env['pt.project.issue.tag'].search([('project_id', '=', project_id)], order='order asc')
         else:
             raise ValueError('default_project_id is not set')
 

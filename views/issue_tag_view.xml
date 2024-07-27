@@ -8,7 +8,7 @@
                 <sheet>
                     <group>
                         <field name="name"/>
-                        <field name="color" widget="color"/>
+                        <field name="order"/>
                         <field name="project_id" readonly="true"/>
                     </group>
                 </sheet>
