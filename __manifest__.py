@@ -1,7 +1,7 @@
 {
     'name': 'Project Tracker',
     'version': '1.0',
-    'depends': ['base'],
+    'depends': ['base', 'mail'],
     'author': 'Fabio Pedrini',
     'category': 'Uncategorized',
     'license': 'LGPL-3',
