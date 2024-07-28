@@ -19,6 +19,7 @@
     'demo': [],
     'assets': {
         'web.assets_backend': [
+            'project-tracker/static/src/css/style.css',
             'project-tracker/static/src/css/kanban_style.css',
         ],
     },

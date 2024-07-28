@@ -4,7 +4,7 @@
         <field name="name">pt.project.issue.label.form</field>
         <field name="model">pt.project.label</field>
         <field name="arch" type="xml">
-            <form string="Issue Tag">
+            <form string="Issue Tag" context="{'default_project_id': active_id}">
                 <sheet>
                     <group>
                         <field name="name"/>

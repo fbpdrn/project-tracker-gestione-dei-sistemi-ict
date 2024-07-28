@@ -18,7 +18,7 @@
                         <field name="reviewer_id"/>
                         <field name="project_id" readonly="true"/>
                         <field name="milestone_id" domain="[('project_id', '=', project_id)]" context="{'default_project_id': project_id}"/>
-                        <field name="label_ids" domain="[('project_id', '=', project_id)]" context="{'default_project_id': project_id}"/>
+                        <field name="label_ids" domain="[('project_id', '=', project_id)]" context="{'default_project_id': project_id}" options="{'no_create': True}"/>
                     </group>
                     <div class="oe_chatter">
                         <field name="message_ids" widget="mail_thread"/>

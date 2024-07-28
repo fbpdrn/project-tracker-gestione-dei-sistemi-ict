@@ -18,8 +18,11 @@ class Issue(models.Model):
     ], string='Priority', default='medium', required=True, tracking=True)
     status = fields.Selection([
         ('open', 'Open'),
+        ('in_progress', 'In Progress'),
+        ('in_review', 'In Review'),
+        ('cancelled', 'Cancelled'),
         ('closed', 'Closed'),
-    ], string='Status', default='open', required=True, tracking=True)
+    ], string='Status', default='open', group_expand='_group_expand_status', required=True, tracking=True)
     assignee_id = fields.Many2one('res.users', string='Assignee', tracking=True)
     reviewer_id = fields.Many2one('res.users', string='Reviewer', tracking=True)
     project_id = fields.Many2one("pt.project", string="Project", ondelete="cascade")
@@ -37,6 +40,10 @@ class Issue(models.Model):
                 order='order asc'))
         else:
             raise ValueError('default_project_id is not set')
+
+    @api.model
+    def _group_expand_status(self, statuses, domain, order):
+        return [key for key, val in type(self).status.selection]
 
     @api.constrains('weight')
     def _check_weight(self):

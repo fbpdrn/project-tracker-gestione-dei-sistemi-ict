@@ -32,7 +32,7 @@
                                         <t t-esc="record.status.value"/>
                                     </span>
                                 </div>
-                                 <div class="o_project_open_issues">
+                                <div class="o_project_open_issues">
                                     <t t-esc="record.open_issues_count.value"/> Open Issues
                                 </div>
                             </div>
@@ -55,7 +55,8 @@
                         <field name="description"/>
                         <field name="status"/>
                     </group>
-                    <button name="%(action_project_issues)d" type="action" string="View Issues" class="btn-primary" context="{'default_project_id': active_id}"/>
+                    <button name="%(action_project_issues_label)d" type="action" string="View Issues by Label" class="btn-primary issue-button-row" context="{'default_project_id': active_id}"/>
+                    <button name="%(action_project_issues_status)d" type="action" string="View Issues by Status" class="btn-primary issue-button-row" context="{'default_project_id': active_id}"/>
                     <notebook>
                         <page string="Milestones">
                             <field name="milestone_ids">
@@ -95,14 +96,23 @@
                                 </form>
                             </field>
                         </page>
+                        <page string="Assignees">
+                            <field name="assignee_ids">
+                                <tree string="Assignees">
+                                    <field name="name"/>
+                                    <field name="login"/>
+                                    <field name="email"/>
+                                </tree>
+                            </field>
+                        </page>
                     </notebook>
                 </sheet>
             </form>
         </field>
     </record>
 
-    <record id="view_project_issue_kanban" model="ir.ui.view">
-        <field name="name">pt.project.issue.kanban</field>
+    <record id="view_project_issue_kanban_label" model="ir.ui.view">
+        <field name="name">pt.project.issue.kanban.label</field>
         <field name="model">pt.issue</field>
         <field name="arch" type="xml">
             <kanban default_group_by="label_ids" create="true" records_draggable="false">
@@ -113,6 +123,46 @@
                 <field name="milestone_id"/>
                 <field name="weight"/>
                 <field name="label_ids"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-att-class="'oe_kanban_global_click ' + (record.status.raw_value == 'closed' ? 'o_kanban_disabled' : '')">
+                            <div t-att-class="o_kanban_card">
+                                <div class="o_kanban_details">
+                                    <strong><t t-esc="record.name.value"/></strong>
+                                    <div class="o_kanban_content">
+                                        <div class="o_kanban_milestone">
+                                            <t t-esc="record.milestone_id.value"/>
+                                        </div>
+                                    </div>
+                                    <div class="o_kanban_status_container">
+                                        <span t-attf-class="o_kanban_status o_kanban_status_#{record.priority.raw_value}">
+                                            <t t-esc="record.priority.value"/>
+                                        </span>
+                                        <div class="o_kanban_weight">
+                                            <span class="fa fa-balance-scale"/>
+                                            <t t-esc="record.weight.value"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="view_project_issue_kanban_status" model="ir.ui.view">
+        <field name="name">pt.project.issue.kanban.status</field>
+        <field name="model">pt.issue</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="status" create="true">
+                <field name="name"/>
+                <field name="description"/>
+                <field name="priority"/>
+                <field name="status"/>
+                <field name="milestone_id"/>
+                <field name="weight"/>
                 <templates>
                     <t t-name="kanban-box">
                         <div t-att-class="'oe_kanban_global_click ' + (record.status.raw_value == 'closed' ? 'o_kanban_disabled' : '')">
@@ -167,11 +217,21 @@
         <field name="view_id" ref="view_project_kanban"/>
     </record>
 
-    <record id="action_project_issues" model="ir.actions.act_window">
-        <field name="name">Project Issues</field>
+    <record id="action_project_issues_label" model="ir.actions.act_window">
+        <field name="name">Project Issues by Label</field>
         <field name="res_model">pt.issue</field>
         <field name="view_mode">kanban,form</field>
-        <field name="view_id" ref="view_project_issue_kanban"/>
+        <field name="view_id" ref="view_project_issue_kanban_label"/>
+        <field name="context">{'default_project_id': active_id}</field>
+        <field name="domain">[('project_id', '=', active_id)]</field>
+        <field name="search_view_id" ref="view_project_issue_search"/>
+    </record>
+
+    <record id="action_project_issues_status" model="ir.actions.act_window">
+        <field name="name">Project Issues by Status</field>
+        <field name="res_model">pt.issue</field>
+        <field name="view_mode">kanban,form</field>
+        <field name="view_id" ref="view_project_issue_kanban_status"/>
         <field name="context">{'default_project_id': active_id}</field>
         <field name="domain">[('project_id', '=', active_id)]</field>
         <field name="search_view_id" ref="view_project_issue_search"/>
