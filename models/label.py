@@ -1,9 +1,9 @@
 from odoo import models, fields
 
 
-class Tag(models.Model):
-    _name = 'pt.project.issue.tag'
-    _description = 'Project Issue Tag'
+class Label(models.Model):
+    _name = 'pt.project.label'
+    _description = 'Project Label'
 
     name = fields.Char(string='Name', required=True)
     order = fields.Integer(string='Order', default=0)

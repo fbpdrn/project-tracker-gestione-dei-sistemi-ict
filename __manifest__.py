@@ -11,7 +11,7 @@
     'data': [
         'views/project_view.xml',
         'views/issue_view.xml',
-        'views/issue_tag_view.xml',
+        'views/issue_label_view.xml',
         'views/milestone_view.xml',
         'views/menu.xml',
         'security/ir.model.access.csv',

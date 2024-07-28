@@ -1,5 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_pt_project,access_pt_project,model_pt_project,base.group_user,1,1,1,1
 access_pt_issue,access_pt_issue,model_pt_issue,base.group_user,1,1,1,1
-access_pt_project_issue_tag,access_pt_project_issue_tag,model_pt_project_issue_tag,base.group_user,1,1,1,1
+access_pt_project_label,access_pt_project_label,model_pt_project_label,base.group_user,1,1,1,1
 access_pt_project_milestone,access_pt_project_milestone,model_pt_project_milestone,base.group_user,1,1,1,1

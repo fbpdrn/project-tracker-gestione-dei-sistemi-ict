@@ -14,7 +14,7 @@ class Project(models.Model):
     ], string='Status', default='on_track', group_expand='_group_expand_status')
     issue_ids = fields.One2many('pt.issue', 'project_id', string='Issues')
     milestone_ids = fields.One2many('pt.project.milestone', 'project_id', string='Milestones')
-    issue_tag_ids = fields.One2many('pt.project.issue.tag', 'project_id', string='Issues Tags')
+    labels_ids = fields.One2many('pt.project.label', 'project_id', string='Labels')
     open_issues_count = fields.Integer(string='Open Issues Count', compute='_compute_open_issues_count')
 
     @api.depends('issue_ids.status')
@@ -25,4 +25,3 @@ class Project(models.Model):
     @api.model
     def _group_expand_status(self, statuses, domain, order):
         return [key for key, val in type(self).status.selection]
-

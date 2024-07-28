@@ -77,8 +77,8 @@
                                 </form>
                             </field>
                         </page>
-                        <page string="Tags">
-                            <field name="issue_tag_ids">
+                        <page string="Labels">
+                            <field name="labels_ids">
                                 <tree>
                                     <field name="name"/>
                                     <field name="order"/>
@@ -103,14 +103,14 @@
         <field name="name">pt.project.issue.kanban</field>
         <field name="model">pt.issue</field>
         <field name="arch" type="xml">
-            <kanban default_group_by="tag_ids" create="true" records_draggable="false">
+            <kanban default_group_by="label_ids" create="true" records_draggable="false">
                 <field name="name"/>
                 <field name="description"/>
                 <field name="priority"/>
                 <field name="status"/>
                 <field name="milestone_id"/>
                 <field name="weight"/>
-                <field name="tag_ids"/>
+                <field name="label_ids"/>
                 <templates>
                     <t t-name="kanban-box">
                         <div t-att-class="'oe_kanban_global_click ' + (record.status.raw_value == 'closed' ? 'o_kanban_disabled' : '')">

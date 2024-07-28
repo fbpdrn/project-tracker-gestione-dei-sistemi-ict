@@ -22,14 +22,14 @@ class Issue(models.Model):
     assignee_id = fields.Many2one('res.users', string='Assignee')
     reviewer_id = fields.Many2one('res.users', string='Reviewer')
     project_id = fields.Many2one("pt.project", string="Project", ondelete="cascade")
-    tag_ids = fields.Many2many('pt.project.issue.tag', string='Tags', group_expand='_group_expand_issue_tag')
+    label_ids = fields.Many2many('pt.project.label', string='Tags', group_expand='_group_expand_labels')
     milestone_id = fields.Many2one('pt.project.milestone', string='Milestone')
 
     @api.model
-    def _group_expand_issue_tag(self, statuses, domain, order):
+    def _group_expand_labels(self, statuses, domain, order):
         project_id = self.env.context.get('default_project_id')
         if project_id:
-            return self.env['pt.project.issue.tag'].search([('project_id', '=', project_id)], order='order asc')
+            return self.env['pt.project.label'].search([('project_id', '=', project_id)], order='order asc')
         else:
             raise ValueError('default_project_id is not set')
 
