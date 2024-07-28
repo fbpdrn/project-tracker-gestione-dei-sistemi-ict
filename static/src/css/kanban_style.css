@@ -59,6 +59,15 @@
     border-top-left-radius: 5px;
 }
 
+.o_kanban_line {
+    width: 2px;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: var(--color-grey);
+}
+
 .o_kanban_status_on_track {
     background-color: var(--color-green);
 }
