@@ -29,7 +29,10 @@ class Issue(models.Model):
     def _group_expand_labels(self, statuses, domain, order):
         project_id = self.env.context.get('default_project_id')
         if project_id:
-            return self.env['pt.project.label'].search([('project_id', '=', project_id)], order='order asc')
+            return (self.env['pt.project.label'].search([
+                ('project_id', '=', project_id),
+                ('visible', '=', True)],
+                order='order asc'))
         else:
             raise ValueError('default_project_id is not set')
 

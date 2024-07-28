@@ -9,6 +9,7 @@
                     <group>
                         <field name="name"/>
                         <field name="order"/>
+                        <field name="visible"/>
                         <field name="project_id" readonly="true"/>
                     </group>
                 </sheet>
