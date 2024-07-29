@@ -10,6 +10,7 @@
     """,
     'data': [
         'views/project_view.xml',
+        'views/report_view.xml',
         'views/issue_view.xml',
         'views/issue_label_view.xml',
         'views/milestone_view.xml',

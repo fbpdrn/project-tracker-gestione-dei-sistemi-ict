@@ -1,0 +1,23 @@
+<odoo>
+    <record id="view_project_reports" model="ir.ui.view">
+        <field name="name">project.issues.pie.chart</field>
+        <field name="model">pt.project</field>
+        <field name="arch" type="xml">
+            <graph string="Issues Status Overview" type="pie">
+                <field name="name" type="dimension"/>
+                <field name="open_issues_count" type="measure"/>
+                <field name="in_progress_issues_count" type="measure"/>
+                <field name="in_review_issues_count" type="measure"/>
+                <field name="cancelled_issues_count" type="measure"/>
+                <field name="closed_issues_count" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="action_reports" model="ir.actions.act_window">
+        <field name="name">Project Comparison Chart</field>
+        <field name="res_model">pt.project</field>
+        <field name="view_mode">graph</field>
+        <field name="view_id" ref="view_project_reports"/>
+    </record>
+</odoo>

@@ -1,4 +1,5 @@
 <odoo>
     <menuitem id="menu_project_tracker" name="Project Tracker"/>
     <menuitem id="menu_projects" name="Projects" parent="menu_project_tracker" action="action_projects"/>
+    <menuitem id="menu_stats" name="Reports" parent="menu_project_tracker" action="action_reports"/>
 </odoo>

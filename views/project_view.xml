@@ -59,6 +59,7 @@
                     <button name="%(action_project_issues_status)d" type="action" string="View Issues by Status" class="btn-primary issue-button-row" context="{'default_project_id': active_id}"/>
                     <button name="%(action_project_issues_assigned)d" type="action" string="View My Issues" class="btn-primary issue-button-row" context="{'default_project_id': active_id}"/>
                     <button name="%(action_project_issues_to_review)d" type="action" string="View My Reviews" class="btn-primary issue-button-row" context="{'default_project_id': active_id}"/>
+                    <button name="%(action_project_issues_comparison)d" type="action" string="View Report" class="btn-primary issue-button-row" context="{'default_project_id': active_id}"/>
                     <notebook>
                         <page string="Milestones">
                             <field name="milestone_ids">
@@ -213,6 +214,17 @@
         </field>
     </record>
 
+    <record id="view_project_issues_reports" model="ir.ui.view">
+        <field name="name">project.issues.status.pie.chart</field>
+        <field name="model">pt.issue</field>
+        <field name="arch" type="xml">
+            <graph string="Issues Status Overview for Project" type="pie">
+                <field name="status" type="dimension"/>
+                <field name="id" string="Issue Count" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
     <!-- Action -->
     <record id="action_projects" model="ir.actions.act_window">
         <field name="name">Projects</field>
@@ -259,5 +271,14 @@
         <field name="context">{'default_project_id': active_id}</field>
         <field name="domain">[('project_id', '=', active_id), ('reviewer_id', '=', uid)]</field>
         <field name="search_view_id" ref="view_project_issue_search"/>
+    </record>
+
+    <record id="action_project_issues_comparison" model="ir.actions.act_window">
+        <field name="name">Project Issues Comparison</field>
+        <field name="res_model">pt.issue</field>
+        <field name="view_mode">graph</field>
+        <field name="view_id" ref="view_project_issues_reports"/>
+        <field name="context">{'default_project_id': active_id}</field>
+        <field name="domain">[('project_id', '=', active_id)]</field>
     </record>
 </odoo>
