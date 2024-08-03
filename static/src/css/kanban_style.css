@@ -6,6 +6,7 @@
     --color-red: #f44336;
     --color-orange: #ff9800;
     --color-green: #4caf50;
+    --color-purple: #5e36d1;
 }
 
 .o_kanban_details {
@@ -78,6 +79,14 @@
 
 .o_kanban_status_delayed {
     background-color: var(--color-red);
+}
+
+.o_kanban_status_on_hold {
+    background-color: var(--color-blue);
+}
+
+.o_kanban_status_done {
+    background-color: var(--color-purple);
 }
 
 .o_kanban_status_low {

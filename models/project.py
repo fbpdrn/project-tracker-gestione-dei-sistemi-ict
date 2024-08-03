@@ -11,6 +11,8 @@ class Project(models.Model):
         ('on_track', 'On Track'),
         ('at_risk', 'At Risk'),
         ('delayed', 'Delayed'),
+        ('on_hold', 'On Hold'),
+        ('done', 'Done')
     ], string='Status', default='on_track', group_expand='_group_expand_status')
     issue_ids = fields.One2many('pt.issue', 'project_id', string='Issues')
     milestone_ids = fields.One2many('pt.project.milestone', 'project_id', string='Milestones')
