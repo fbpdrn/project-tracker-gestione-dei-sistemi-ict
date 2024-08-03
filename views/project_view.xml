@@ -21,7 +21,7 @@
                 <field name="name"/>
                 <field name="description"/>
                 <field name="status"/>
-                <field name="open_issues_count"/>
+                <field name="active_issues_count"/>
                 <templates>
                     <t t-name="kanban-box">
                         <div class="oe_kanban_global_click">
@@ -32,8 +32,8 @@
                                         <t t-esc="record.status.value"/>
                                     </span>
                                 </div>
-                                <div class="o_project_open_issues">
-                                    <t t-esc="record.open_issues_count.value"/> Open Issues
+                                <div class="o_project_active_issues">
+                                    <t t-esc="record.active_issues_count.value"/> Active Issues
                                 </div>
                             </div>
                         </div>

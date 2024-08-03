@@ -23,6 +23,7 @@ class Project(models.Model):
     cancelled_issues_count = fields.Integer(string='Cancelled Issues Count', compute='_compute_issues_count', store=True)
     closed_issues_count = fields.Integer(string='Closed Issues Count', compute='_compute_issues_count', store=True)
     issues_count = fields.Integer(string='Issues Count', compute='_compute_issues_count', store=True)
+    active_issues_count = fields.Integer(string='Active Issues Count', compute='_compute_issues_count', store=True)
 
     @api.depends('issue_ids.status')
     def _compute_issues_count(self):
@@ -33,6 +34,7 @@ class Project(models.Model):
             project.cancelled_issues_count = len(project.issue_ids.filtered(lambda issue: issue.status == 'cancelled'))
             project.closed_issues_count = len(project.issue_ids.filtered(lambda issue: issue.status == 'closed'))
             project.issues_count = len(project.issue_ids)
+            project.active_issues_count = project.open_issues_count + project.in_progress_issues_count + project.in_review_issues_count
 
     @api.depends('issue_ids.assignee_id')
     def _compute_assignee_ids(self):
