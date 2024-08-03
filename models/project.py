@@ -25,6 +25,9 @@ class Project(models.Model):
     issues_count = fields.Integer(string='Issues Count', compute='_compute_issues_count', store=True)
     active_issues_count = fields.Integer(string='Active Issues Count', compute='_compute_issues_count', store=True)
 
+    milestones_count = fields.Integer(string='Milestones Count', compute='_compute_milestones_count', store=True)
+    active_milestones_count = fields.Integer(string='Active Milestones Count', compute='_compute_milestones_count', store=True)
+
     @api.depends('issue_ids.status')
     def _compute_issues_count(self):
         for project in self:
@@ -35,6 +38,12 @@ class Project(models.Model):
             project.closed_issues_count = len(project.issue_ids.filtered(lambda issue: issue.status == 'closed'))
             project.issues_count = len(project.issue_ids)
             project.active_issues_count = project.open_issues_count + project.in_progress_issues_count + project.in_review_issues_count
+
+    @api.depends('milestone_ids.project_id')
+    def _compute_milestones_count(self):
+        for project in self:
+            project.milestones_count = len(project.milestone_ids)
+            project.active_milestones_count = len(project.milestone_ids.filtered(lambda milestone: milestone.status == 'open'))
 
     @api.depends('issue_ids.assignee_id')
     def _compute_assignee_ids(self):
