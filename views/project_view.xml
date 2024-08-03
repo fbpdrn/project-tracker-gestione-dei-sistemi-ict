@@ -112,6 +112,15 @@
                                 </tree>
                             </field>
                         </page>
+                         <page string="Reviewers">
+                            <field name="reviewer_ids">
+                                <tree string="Reviewers">
+                                    <field name="name"/>
+                                    <field name="login"/>
+                                    <field name="email"/>
+                                </tree>
+                            </field>
+                        </page>
                     </notebook>
                 </sheet>
             </form>

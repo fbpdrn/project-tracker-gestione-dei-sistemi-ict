@@ -17,7 +17,8 @@ class Project(models.Model):
     issue_ids = fields.One2many('pt.issue', 'project_id', string='Issues')
     milestone_ids = fields.One2many('pt.project.milestone', 'project_id', string='Milestones')
     labels_ids = fields.One2many('pt.project.label', 'project_id', string='Labels')
-    assignee_ids = fields.Many2many('res.users', string='Assignees', compute='_compute_assignee_ids', store=True)
+    assignee_ids = fields.Many2many('res.users', 'project_assignee_rel', 'project_id', 'user_id', string='Assignees', compute='_compute_assignee_ids', store=True)
+    reviewer_ids = fields.Many2many('res.users', 'project_reviewer_rel', 'project_id', 'user_id', string='Reviewers', compute='_compute_reviewer_ids', store=True)
 
     open_issues_count = fields.Integer(string='Open Issues Count', compute='_compute_issues_count', store=True)
     in_progress_issues_count = fields.Integer(string='In Progress Issues Count', compute='_compute_issues_count', store=True)
@@ -52,6 +53,12 @@ class Project(models.Model):
         for project in self:
             assignee_ids = project.issue_ids.mapped('assignee_id').ids
             project.assignee_ids = [(6, 0, assignee_ids)]
+
+    @api.depends('issue_ids.reviewer_id')
+    def _compute_reviewer_ids(self):
+        for project in self:
+            reviewer_ids = project.issue_ids.mapped('reviewer_id').ids
+            project.reviewer_ids = [(6, 0, reviewer_ids)]
 
     @api.model
     def _group_expand_status(self, statuses, domain, order):
