@@ -12,7 +12,7 @@
         </field>
     </record>
 
-    <!-- Kanban View -->
+    <!-- Kanban Views -->
     <record id="view_project_kanban" model="ir.ui.view">
         <field name="name">pt.project.kanban</field>
         <field name="model">pt.project</field>
@@ -44,86 +44,6 @@
                     </t>
                 </templates>
             </kanban>
-        </field>
-    </record>
-
-    <!-- Form View -->
-    <record id="view_project_form" model="ir.ui.view">
-        <field name="name">pt.project.form</field>
-        <field name="model">pt.project</field>
-        <field name="arch" type="xml">
-            <form string="Project">
-                <sheet>
-                    <group>
-                        <field name="name"/>
-                        <field name="description"/>
-                        <field name="status"/>
-                    </group>
-                    <button name="%(action_project_issues_label)d" type="action" string="View Issues by Label" class="btn-primary issue-button-row" context="{'default_project_id': active_id}"/>
-                    <button name="%(action_project_issues_status)d" type="action" string="View Issues by Status" class="btn-primary issue-button-row" context="{'default_project_id': active_id}"/>
-                    <button name="%(action_project_issues_assigned)d" type="action" string="View My Issues" class="btn-primary issue-button-row" context="{'default_project_id': active_id}"/>
-                    <button name="%(action_project_issues_to_review)d" type="action" string="View My Reviews" class="btn-primary issue-button-row" context="{'default_project_id': active_id}"/>
-                    <button name="%(action_project_issues_comparison)d" type="action" string="View Report" class="btn-primary issue-button-row" context="{'default_project_id': active_id}"/>
-                    <notebook>
-                        <page string="Milestones">
-                            <field name="milestone_ids">
-                                <tree>
-                                    <field name="name"/>
-                                    <field name="start_date"/>
-                                    <field name="end_date"/>
-                                    <field name="status"/>
-                                    <field name="project_id" readonly="true"/>
-                                </tree>
-                                <form>
-                                    <group>
-                                        <field name="name"/>
-                                        <field name="start_date"/>
-                                        <field name="end_date"/>
-                                        <field name="status"/>
-                                        <field name="project_id" readonly="true"/>
-                                    </group>
-                                </form>
-                            </field>
-                        </page>
-                        <page string="Labels">
-                            <field name="labels_ids">
-                                <tree>
-                                    <field name="name"/>
-                                    <field name="order"/>
-                                    <field name="visible"/>
-                                    <field name="project_id" readonly="true"/>
-                                </tree>
-                                <form>
-                                    <group>
-                                        <field name="name"/>
-                                        <field name="order"/>
-                                        <field name="visible"/>
-                                        <field name="project_id" readonly="true"/>
-                                    </group>
-                                </form>
-                            </field>
-                        </page>
-                        <page string="Assignees">
-                            <field name="assignee_ids">
-                                <tree string="Assignees">
-                                    <field name="name"/>
-                                    <field name="login"/>
-                                    <field name="email"/>
-                                </tree>
-                            </field>
-                        </page>
-                         <page string="Reviewers">
-                            <field name="reviewer_ids">
-                                <tree string="Reviewers">
-                                    <field name="name"/>
-                                    <field name="login"/>
-                                    <field name="email"/>
-                                </tree>
-                            </field>
-                        </page>
-                    </notebook>
-                </sheet>
-            </form>
         </field>
     </record>
 
@@ -210,6 +130,7 @@
         </field>
     </record>
 
+    <!-- Search Filters -->
     <record id="view_project_issue_search" model="ir.ui.view">
         <field name="name">pt.issue.search</field>
         <field name="model">pt.issue</field>
@@ -227,6 +148,7 @@
         </field>
     </record>
 
+    <!-- Report View -->
     <record id="view_project_issues_reports" model="ir.ui.view">
         <field name="name">project.issues.status.pie.chart</field>
         <field name="model">pt.issue</field>
@@ -238,14 +160,7 @@
         </field>
     </record>
 
-    <!-- Action -->
-    <record id="action_projects" model="ir.actions.act_window">
-        <field name="name">Projects</field>
-        <field name="res_model">pt.project</field>
-        <field name="view_mode">kanban,tree,form</field>
-        <field name="view_id" ref="view_project_kanban"/>
-    </record>
-
+    <!-- Actions -->
     <record id="action_project_issues_label" model="ir.actions.act_window">
         <field name="name">Project Issues by Label</field>
         <field name="res_model">pt.issue</field>
@@ -276,6 +191,13 @@
         <field name="search_view_id" ref="view_project_issue_search"/>
     </record>
 
+        <record id="action_projects" model="ir.actions.act_window">
+        <field name="name">Projects</field>
+        <field name="res_model">pt.project</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="view_id" ref="view_project_kanban"/>
+    </record>
+
     <record id="action_project_issues_to_review" model="ir.actions.act_window">
         <field name="name">My Project Review</field>
         <field name="res_model">pt.issue</field>
@@ -293,5 +215,85 @@
         <field name="view_id" ref="view_project_issues_reports"/>
         <field name="context">{'default_project_id': active_id}</field>
         <field name="domain">[('project_id', '=', active_id)]</field>
+    </record>
+
+    <!-- Form View -->
+    <record id="view_project_form" model="ir.ui.view">
+        <field name="name">pt.project.form</field>
+        <field name="model">pt.project</field>
+        <field name="arch" type="xml">
+            <form string="Project">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="description"/>
+                        <field name="status"/>
+                    </group>
+                    <button name="%(action_project_issues_label)d" type="action" string="View Issues by Label" class="btn-primary issue-button-row" context="{'default_project_id': active_id}"/>
+                    <button name="%(action_project_issues_status)d" type="action" string="View Issues by Status" class="btn-primary issue-button-row" context="{'default_project_id': active_id}"/>
+                    <button name="%(action_project_issues_assigned)d" type="action" string="View My Issues" class="btn-primary issue-button-row" context="{'default_project_id': active_id}"/>
+                    <button name="%(action_project_issues_to_review)d" type="action" string="View My Reviews" class="btn-primary issue-button-row" context="{'default_project_id': active_id}"/>
+                    <button name="%(action_project_issues_comparison)d" type="action" string="View Report" class="btn-primary issue-button-row" context="{'default_project_id': active_id}"/>
+                    <notebook>
+                        <page string="Milestones">
+                            <field name="milestone_ids">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="start_date"/>
+                                    <field name="end_date"/>
+                                    <field name="status"/>
+                                    <field name="project_id" readonly="true"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="name"/>
+                                        <field name="start_date"/>
+                                        <field name="end_date"/>
+                                        <field name="status"/>
+                                        <field name="project_id" readonly="true"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                        <page string="Labels">
+                            <field name="labels_ids">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="order"/>
+                                    <field name="visible"/>
+                                    <field name="project_id" readonly="true"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="name"/>
+                                        <field name="order"/>
+                                        <field name="visible"/>
+                                        <field name="project_id" readonly="true"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
+                        <page string="Assignees">
+                            <field name="assignee_ids">
+                                <tree string="Assignees">
+                                    <field name="name"/>
+                                    <field name="login"/>
+                                    <field name="email"/>
+                                </tree>
+                            </field>
+                        </page>
+                         <page string="Reviewers">
+                            <field name="reviewer_ids">
+                                <tree string="Reviewers">
+                                    <field name="name"/>
+                                    <field name="login"/>
+                                    <field name="email"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
     </record>
 </odoo>
