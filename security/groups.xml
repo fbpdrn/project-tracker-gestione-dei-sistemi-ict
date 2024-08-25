@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="module_category_project_tracker" model="ir.module.category">
+        <field name="name">Project Tracker</field>
+        <field name="sequence">10</field>
+    </record>
+    <record id="group_project_tracker_maintainer" model="res.groups">
+        <field name="name">Maintainer</field>
+        <field name="category_id" ref="module_category_project_tracker"/>
+    </record>
+    <record id="group_project_tracker_manager" model="res.groups">
+        <field name="name">Manager</field>
+        <field name="category_id" ref="module_category_project_tracker"/>
+    </record>
+</odoo>

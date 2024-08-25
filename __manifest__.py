@@ -15,6 +15,7 @@
         'views/issue_label_view.xml',
         'views/milestone_view.xml',
         'views/menu.xml',
+        'security/groups.xml',
         'security/ir.model.access.csv',
     ],
     'demo': [],

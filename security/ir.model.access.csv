@@ -1,5 +1,13 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_pt_project,access_pt_project,model_pt_project,base.group_user,1,1,1,1
-access_pt_issue,access_pt_issue,model_pt_issue,base.group_user,1,1,1,1
-access_pt_project_label,access_pt_project_label,model_pt_project_label,base.group_user,1,1,1,1
-access_pt_project_milestone,access_pt_project_milestone,model_pt_project_milestone,base.group_user,1,1,1,1
+access_pt_project_maintainer,access.pt.project.maintainer,model_pt_project,group_project_tracker_maintainer,1,1,1,1
+access_pt_project_manager,access.pt.project.manager,model_pt_project,group_project_tracker_manager,1,1,0,0
+access_pt_issue_maintainer,access.pt.issue.maintainer,model_pt_issue,group_project_tracker_maintainer,1,1,1,1
+access_pt_issue_manager,access.pt.issue.manager,model_pt_issue,group_project_tracker_manager,1,1,1,0
+access_pt_project_label_maintainer,access.pt.project.label.maintainer,model_pt_project_label,group_project_tracker_maintainer,1,1,1,1
+access_pt_project_label_manager,access.pt.project.label.manager,model_pt_project_label,group_project_tracker_manager,1,1,1,0
+access_pt_project_milestone_maintainer,access.pt.project.milestone.maintainer,model_pt_project_milestone,group_project_tracker_maintainer,1,1,1,1
+access_pt_project_milestone_manager,access.pt.project.milestone.manager,model_pt_project_milestone,group_project_tracker_manager,1,1,1,0
+access_pt_project_guest,access.pt.project.guest,model_pt_project,base.group_user,1,0,0,0
+access_pt_issue_guest,access.pt.issue.guest,model_pt_issue,base.group_user,1,0,0,0
+access_pt_project_label_guest,access.pt.project.label.guest,model_pt_project_label,base.group_user,1,0,0,0
+access_pt_project_milestone_guest,access.pt.project.milestone.guest,model_pt_project_milestone,base.group_user,1,0,0,0
