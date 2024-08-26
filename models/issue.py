@@ -51,3 +51,31 @@ class Issue(models.Model):
             if record.weight < 1:
                 raise exceptions.ValidationError('The weight must be at least 1.')
 
+    # Override
+    def action_set_status_in_progress(self):
+        if self.status != 'open' and self.status != 'in_review':
+            raise exceptions.UserError("The current status must be 'Open' or 'In Review'.")
+        if self.env.user.id not in [self.assignee_id.id, self.reviewer_id.id]:
+            raise exceptions.AccessError("Only the assignee or reviewer can set the status to 'In Progress'.")
+        return self.sudo().write({'status': 'in_progress'})
+
+    # Override
+    def action_set_status_in_review(self):
+        if self.status != 'in_progress':
+            raise exceptions.UserError("The current status must be 'In Progress'.")
+        if self.env.user.id not in [self.assignee_id.id]:
+            raise exceptions.AccessError("Only the assignee can set the status to 'In Review'.")
+        return self.sudo().write({'status': 'in_review'})
+
+    # Override
+    def action_set_status_closed(self):
+        if self.status != 'in_review':
+            raise exceptions.UserError("The current status must be 'In Review'.")
+        if self.env.user.id not in [self.reviewer_id.id]:
+            raise exceptions.AccessError("Only the reviewer can set the status to 'Closed'.")
+        return self.sudo().write({'status': 'closed'})
+
+    # Override
+    def message_post(self, **kwargs):
+        return super(Issue, self.sudo()).message_post(**kwargs)
+

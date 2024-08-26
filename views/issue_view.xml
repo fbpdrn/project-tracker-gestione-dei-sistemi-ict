@@ -5,6 +5,11 @@
         <field name="model">pt.issue</field>
         <field name="arch" type="xml">
             <form string="Issue">
+                <header>
+                    <button name="action_set_status_in_progress" type="object" string="Set as In Progress"/>
+                    <button name="action_set_status_in_review" type="object" string="Set as In Review"/>
+                    <button name="action_set_status_closed" type="object" string="Set as Closed"/>
+                </header>
                 <sheet>
                     <group>
                         <field name="name"/>
