@@ -27,7 +27,7 @@ class Issue(models.Model):
     reviewer_id = fields.Many2one('res.users', string='Reviewer', tracking=True)
     project_id = fields.Many2one("pt.project", string="Project", ondelete="cascade")
     label_ids = fields.Many2many('pt.project.label',
-                                 string='Tags', group_expand='_group_expand_labels', tracking=True)
+                                 string='Labels', group_expand='_group_expand_labels', tracking=True)
     milestone_id = fields.Many2one('pt.project.milestone', string='Milestone', tracking=True)
 
     @api.model
