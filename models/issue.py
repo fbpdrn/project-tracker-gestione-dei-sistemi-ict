@@ -51,6 +51,12 @@ class Issue(models.Model):
             if record.weight < 1:
                 raise exceptions.ValidationError('The weight must be at least 1.')
 
+    @api.constrains('start_date', 'end_date')
+    def _check_dates(self):
+        for record in self:
+            if record.end_date and record.start_date and record.end_date < record.start_date:
+                raise exceptions.ValidationError('Issue: the end date must be greater than or equal to the start date.')
+
     # Override
     def action_set_status_in_progress(self):
         if self.status != 'open' and self.status != 'in_review':
